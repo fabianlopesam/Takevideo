@@ -31,7 +31,6 @@ public class ClientesController {
     @GetMapping(path="/todos")
     public @ResponseBody Iterable<Cliente> todosClientes() {
         // This returns a JSON or XML with the users
-        Iterable<Cliente> resultado1 = clientesRepository.findAll();
-        return resultado1;
+        return clientesRepository.findAll();
     }
 }
