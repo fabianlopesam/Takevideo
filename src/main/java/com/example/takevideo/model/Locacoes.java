@@ -1,6 +1,8 @@
 package com.example.takevideo.model;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "locacoes")
@@ -16,6 +18,8 @@ public class Locacoes {
     private List<Filmes> filmes;
     private Long quantidade;
     private double valorlocacao;
+    private Date datalocacao;
+    private Date datadevolucao;
 
     public Long getId() {
         return id;
@@ -55,4 +59,19 @@ public class Locacoes {
     public void  setValorlocacao(double valorlocacao) {
         this.valorlocacao = valorlocacao;
     }
+
+    public Date getDatalocacao() {
+        return datalocacao;
+    }
+    public void setDatalocacao(Date datalocacao) {
+        this.datalocacao = datalocacao;
+    }
+
+    public Date getDatadevolucao() {
+        return datadevolucao;
+    }
+    public void setDatadevolucao(Date datadevolucao) {
+        this.datadevolucao = datadevolucao;
+    }
+
 }
