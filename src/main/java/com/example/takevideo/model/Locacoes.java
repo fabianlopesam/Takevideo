@@ -11,7 +11,7 @@ public class Locacoes {
     private Long id;
     @ManyToOne
     private Clientes cliente;
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private Filmes filmes;
     private Long quantidade;
     private double valorlocacao;
