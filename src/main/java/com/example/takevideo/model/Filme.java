@@ -1,16 +1,18 @@
 package com.example.takevideo.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "filmes")
 @Entity
-public class Filmes {
+public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    private String codigo;
     private String nome;
-    private double valorunitario;
+    private BigDecimal valorunitario;
 
     public Long getId() {
         return id;
@@ -19,6 +21,15 @@ public class Filmes {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -27,11 +38,11 @@ public class Filmes {
         this.nome = nome;
     }
 
-    public double getValorunitario() {
+    public BigDecimal getValorunitario() {
         return valorunitario;
     }
 
-    public void  setValorunitario(double valorunitario) {
+    public void  setValorunitario(BigDecimal valorunitario) {
         this.valorunitario = valorunitario;
     }
 }

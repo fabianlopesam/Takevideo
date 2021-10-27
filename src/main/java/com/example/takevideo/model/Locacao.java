@@ -1,23 +1,24 @@
 package com.example.takevideo.model;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Table(name = "locacoes")
 @Entity
-public class Locacoes {
+public class Locacao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @ManyToOne
-    private Clientes cliente;
-    @OneToMany(mappedBy = "id")
-    private List<Filmes> filmes;
-    private Long quantidade;
-    private double valorlocacao;
+    private Cliente cliente;
+
+    @OneToMany
+    private List<ItemLocacao> itenslocacao;
+
     private Date datalocacao;
     private Date datadevolucao;
 
@@ -28,36 +29,12 @@ public class Locacoes {
     public void setId(Long id) {
         this.id = id;
     }
-    public Clientes getClientes() {
+    public Cliente getClientes() {
         return cliente;
     }
 
-    public void setCliente(Clientes cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public List<Filmes> getFilmes() {
-        return filmes;
-    }
-
-    public void setFilmes(List<Filmes> filmes) {
-        this.filmes = filmes;
-    }
-
-    public Long getQuantidade() {
-        return  quantidade;
-    }
-
-    public void setQuantidade(Long quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getValorlocacao() {
-        return valorlocacao;
-    }
-
-    public void  setValorlocacao(double valorlocacao) {
-        this.valorlocacao = valorlocacao;
     }
 
     public Date getDatalocacao() {
@@ -72,6 +49,13 @@ public class Locacoes {
     }
     public void setDatadevolucao(Date datadevolucao) {
         this.datadevolucao = datadevolucao;
+    }
+
+    public List<ItemLocacao> getItenslocacao() {
+        return itenslocacao;
+    }
+    public void setItenslocacao(List<ItemLocacao> itenslocacao) {
+        this.itenslocacao = itenslocacao;
     }
 
 }

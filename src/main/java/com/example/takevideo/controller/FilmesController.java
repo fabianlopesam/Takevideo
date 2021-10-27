@@ -1,5 +1,5 @@
 package com.example.takevideo.controller;
-import com.example.takevideo.model.Filmes;
+import com.example.takevideo.model.Filme;
 import com.example.takevideo.repository.FilmesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +22,15 @@ public class FilmesController {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        Filmes n = new Filmes();
+
+        Filme n = new Filme();
         n.setNome(nome);
         filmesRepository.save(n);
         return "Salvo";
     }
 
     @GetMapping(path="/todos")
-    public @ResponseBody Iterable<Filmes> todosFilmes() {
+    public @ResponseBody Iterable<Filme> todosFilmes() {
         // This returns a JSON or XML with the users
         return filmesRepository.findAll();
     }

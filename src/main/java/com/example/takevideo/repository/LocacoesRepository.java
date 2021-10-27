@@ -1,11 +1,10 @@
 package com.example.takevideo.repository;
 
-import com.example.takevideo.model.Clientes;
-import com.example.takevideo.model.Locacoes;
+import com.example.takevideo.model.Locacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-public interface LocacoesRepository extends JpaRepository<Locacoes, Long> {
+public interface LocacoesRepository extends JpaRepository<Locacao, Long> {
     @Override
-    List<Locacoes> findAll();
+    List<Locacao> findAll();
 }

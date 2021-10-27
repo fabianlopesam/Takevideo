@@ -4,11 +4,13 @@ import javax.persistence.*;
 
 @Table(name = "clientes")
 @Entity
-public class Clientes {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private String codigo;
     private String nome;
 
     public Long getId() {
@@ -18,6 +20,15 @@ public class Clientes {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public String getNome() {
         return nome;
     }
