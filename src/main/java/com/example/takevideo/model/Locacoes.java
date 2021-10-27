@@ -9,9 +9,9 @@ public class Locacoes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Clientes cliente;
-    @OneToMany(mappedBy = "id")
+    @OneToMany
     private Filmes filmes;
     private Long quantidade;
     private double valorlocacao;
@@ -36,7 +36,7 @@ public class Locacoes {
     }
 
     public void setFilmes(Filmes filmes) {
-        this.filmes;
+        this.filmes = filmes;
     }
 
     public Long getQuantidade() {
