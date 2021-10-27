@@ -17,7 +17,7 @@ public class ClientesController {
     @Autowired
     private ClientesRepository clientesRepository;
 
-    @PostMapping(path="/novo") // Map ONLY POST Requests
+    @PostMapping(path="/add") // Map ONLY POST Requests
     public @ResponseBody String novoCliente (@RequestParam String nome) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
