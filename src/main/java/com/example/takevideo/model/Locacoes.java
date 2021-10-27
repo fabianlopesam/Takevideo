@@ -1,6 +1,7 @@
 package com.example.takevideo.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "locacoes")
 @Entity
@@ -12,7 +13,7 @@ public class Locacoes {
     @ManyToOne
     private Clientes cliente;
     @OneToMany(mappedBy = "id")
-    private Filmes filmes;
+    private List<Filmes> filmes;
     private Long quantidade;
     private double valorlocacao;
 
@@ -31,11 +32,11 @@ public class Locacoes {
         this.cliente = cliente;
     }
 
-    public Filmes getFilmes() {
+    public List<Filmes> getFilmes() {
         return filmes;
     }
 
-    public void setFilmes(Filmes filmes) {
+    public void setFilmes(List<Filmes> filmes) {
         this.filmes = filmes;
     }
 
