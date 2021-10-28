@@ -2,36 +2,35 @@ package com.example.takevideo.controller;
 import com.example.takevideo.model.Filme;
 import com.example.takevideo.repository.FilmesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller // This means that this class is a Controller
+import java.util.List;
+
+@RestController // This means that this class is a Controller
 @RequestMapping(path="/filmes") // This means URL's start with /demo (after Application path)
 
 public class FilmesController {
     @Autowired
     private FilmesRepository filmesRepository;
 
-    @PostMapping(path="/novo") // Map ONLY POST Requests
-    public @ResponseBody
-    String novoFilme (@RequestParam String nome) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-
-
-        Filme n = new Filme();
-        n.setNome(nome);
-        filmesRepository.save(n);
-        return "Salvo";
+    @PostMapping(value = "novo") // Map ONLY POST Requests
+    @ResponseBody
+    public Filme novoFilme(@RequestBody Filme filme){
+        return filmesRepository.save(filme);
     }
 
-    @GetMapping(path="/todos")
+    @GetMapping(value = "todos")
     public @ResponseBody Iterable<Filme> todosFilmes() {
-        // This returns a JSON or XML with the users
         return filmesRepository.findAll();
     }
+
+    @GetMapping(value = "todosantigo")
+    @ResponseBody
+    public ResponseEntity<List<Filme>> listaFilmes(){
+        List<Filme> filmes = filmesRepository.findAll();
+        return new ResponseEntity<>(filmes, HttpStatus.OK);
+    }
+
 }

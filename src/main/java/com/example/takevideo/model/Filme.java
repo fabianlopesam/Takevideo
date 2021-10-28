@@ -22,8 +22,8 @@ public class Filme {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigo(String codigo) {
+        return this.codigo;
     }
 
     public void setCodigo(String codigo) {
@@ -38,8 +38,8 @@ public class Filme {
         this.nome = nome;
     }
 
-    public BigDecimal getValorunitario() {
-        return valorunitario;
+    public BigDecimal getValorunitario(BigDecimal valorunitario) {
+        return this.valorunitario;
     }
 
     public void  setValorunitario(BigDecimal valorunitario) {
