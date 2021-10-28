@@ -21,6 +21,22 @@ public class ItemLocacao {
     @OneToMany(mappedBy = "id")
     private List<Filme> filmes;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Locacao getLocacoes() {
+        return locacoes;
+    }
+
+    public void setLocacoes(Locacao locacoes) {
+        this.locacoes = locacoes;
+    }
+
     public List<Filme> getFilmes() {
         return filmes;
     }

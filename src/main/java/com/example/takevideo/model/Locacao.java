@@ -24,6 +24,7 @@ public class Locacao {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Cliente getClientes() {
         return cliente;
     }
