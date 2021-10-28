@@ -22,27 +22,32 @@ public class Filme {
         this.id = id;
     }
 
-    public String getCodigo(String codigo) {
-        return this.codigo;
+    public String getCodigo() {
+        return codigo;
     }
 
     public void setCodigo(String codigo) {
+
         this.codigo = codigo;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
-    public BigDecimal getValorunitario(BigDecimal valorunitario) {
-        return this.valorunitario;
+    public BigDecimal getValorunitario() {
+        return valorunitario;
     }
+      public void  setValorunitario(BigDecimal valorunitario) {
 
-    public void  setValorunitario(BigDecimal valorunitario) {
         this.valorunitario = valorunitario;
     }
+
+
 }

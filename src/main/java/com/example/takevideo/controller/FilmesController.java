@@ -42,9 +42,9 @@ public class FilmesController {
     @PutMapping("{id}")
     public  ResponseEntity<Filme> alterar (@RequestBody Filme filme, @PathVariable Long id) {
         Filme altera = filmesRepository.findById(id).get();
-        //altera.setCodigo(filme.getCodigo());
+        altera.setCodigo(filme.getCodigo());
         altera.setNome(filme.getNome());
-        //altera.setValorunitario(filme.getValorunitario());
+        altera.setValorunitario(filme.getValorunitario());
         return ResponseEntity.ok(filmesRepository.save(altera));
     }
 
