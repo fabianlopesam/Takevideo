@@ -8,18 +8,22 @@ import java.util.List;
 @Entity
 public class ItemLocacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long quantidade;
-    private BigDecimal valoritem;
+    @ManyToOne
+    private Locacao locacao;
 
     @ManyToOne
-    private Locacao locacoes;
+    private Filme filme;
 
-    @OneToMany(mappedBy = "id")
-    private List<Filme> filmes;
+    private Integer quantidade;
+
+    private BigDecimal valoritem;
+
+
+
 
     public Long getId() {
         return id;
@@ -29,26 +33,27 @@ public class ItemLocacao {
         this.id = id;
     }
 
-    public Locacao getLocacoes() {
-        return locacoes;
+    public Locacao getLocacao() {
+        return locacao;
     }
 
-    public void setLocacoes(Locacao locacoes) {
-        this.locacoes = locacoes;
+    public void setLocacao(Locacao locacao) {
+        this.locacao = locacao;
     }
 
-    public List<Filme> getFilmes() {
-        return filmes;
-    }
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
+    public Filme getFilme() {
+        return filme;
     }
 
-    public Long getQuantidade() {
-        return  quantidade;
+    public void setFilme(Filme filme) {
+        this.filme = filme;
     }
 
-    public void setQuantidade(Long quantidade) {
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -56,7 +61,7 @@ public class ItemLocacao {
         return valoritem;
     }
 
-    public void  setValorlocacao(BigDecimal valoritem) {
+    public void setValoritem(BigDecimal valoritem) {
         this.valoritem = valoritem;
     }
 }

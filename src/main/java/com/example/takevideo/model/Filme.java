@@ -7,12 +7,20 @@ import java.math.BigDecimal;
 @Entity
 public class Filme {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
     private String codigo;
+
     private String nome;
+
     private BigDecimal valorunitario;
+
+
+
+
+
 
     public Long getId() {
         return id;

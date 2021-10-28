@@ -2,12 +2,14 @@ package com.example.takevideo.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "locacoes")
 @Entity
 public class Locacao {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -15,36 +17,12 @@ public class Locacao {
     private Cliente cliente;
 
     private Date datalocacao;
+
     private Date datadevolucao;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "locacao")
+    private List<ItemLocacao> itens;
 
-    public Cliente getClientes() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Date getDatalocacao() {
-        return datalocacao;
-    }
-    public void setDatalocacao(Date datalocacao) {
-        this.datalocacao = datalocacao;
-    }
-
-    public Date getDatadevolucao() {
-        return datadevolucao;
-    }
-    public void setDatadevolucao(Date datadevolucao) {
-        this.datadevolucao = datadevolucao;
-    }
 
 }
