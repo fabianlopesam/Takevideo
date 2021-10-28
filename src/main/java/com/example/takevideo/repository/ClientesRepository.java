@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface ClientesRepository extends JpaRepository<Cliente, Long> {
     @Override
-    List<Cliente> findAll();;
-
-    void delete(Optional<Cliente> byId);
+    List<Cliente> findAll();
 }

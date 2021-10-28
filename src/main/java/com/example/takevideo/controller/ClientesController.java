@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/clientes") // This means URL's start with /demo (after Application path)
 
@@ -28,19 +26,25 @@ public class ClientesController {
         return clientesRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscar(@PathVariable(value = "id") Long id) {
+        Cliente b = clientesRepository.findById(id).get();
+        return ResponseEntity.ok().body(b);
+    }
+
     @DeleteMapping("{id}")
     public String deletar(Long id){
-        Optional<Cliente> d = clientesRepository.findById(id);
+        Cliente d = clientesRepository.findById(id).get();
         clientesRepository.delete(d);
         return "Deletado";
     }
 
     @PutMapping("{id}")
     public  ResponseEntity<Cliente> alterar (@RequestBody Cliente cliente, @PathVariable Long id) {
-        Cliente altera = clientesRepository.findById(id);
+        Cliente altera = clientesRepository.findById(id).get();
         altera.setCodigo(cliente.getCodigo());
         altera.setNome(cliente.getNome());
-        return ResponseEntity.ok(clientesRepository.save(altera))
+        return ResponseEntity.ok(clientesRepository.save(altera));
     }
 
 }
