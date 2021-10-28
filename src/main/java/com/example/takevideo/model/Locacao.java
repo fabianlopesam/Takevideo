@@ -16,9 +16,6 @@ public class Locacao {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToMany
-    private List<ItemLocacao> itenslocacao;
-
     private Date datalocacao;
     private Date datadevolucao;
 
@@ -49,13 +46,6 @@ public class Locacao {
     }
     public void setDatadevolucao(Date datadevolucao) {
         this.datadevolucao = datadevolucao;
-    }
-
-    public List<ItemLocacao> getItenslocacao() {
-        return itenslocacao;
-    }
-    public void setItenslocacao(List<ItemLocacao> itenslocacao) {
-        this.itenslocacao = itenslocacao;
     }
 
 }

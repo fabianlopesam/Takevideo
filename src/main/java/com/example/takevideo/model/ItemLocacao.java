@@ -15,6 +15,9 @@ public class ItemLocacao {
     private Long quantidade;
     private BigDecimal valoritem;
 
+    @ManyToOne
+    private Locacao locacoes;
+
     @OneToMany(mappedBy = "id")
     private List<Filme> filmes;
 
