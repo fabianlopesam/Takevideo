@@ -22,9 +22,6 @@ public class ItemLocacao {
 
     private BigDecimal valoritem;
 
-
-
-
     public Long getId() {
         return id;
     }
