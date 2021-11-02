@@ -2,6 +2,8 @@ package com.example.takevideo.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,9 +19,11 @@ public class ItemLocacao {
     private Long id;
 
     @ManyToOne
+    @NotNull
     private Locacao locacao;
 
     @ManyToOne
+    @NotNull
     private Filme filme;
 
     private Integer quantidade;

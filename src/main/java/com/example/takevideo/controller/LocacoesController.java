@@ -24,12 +24,18 @@ public class LocacoesController {
     @PostMapping(value = "salvar")
     @ResponseBody
     public ResponseEntity<Locacao> salvar (@RequestBody Locacao locacao){
-        Locacao novo = locacoesRepository.save(locacao);
-        ItemLocacao novositens = new ItemLocacao();
-        novositens.setLocacao(novo);
-        List<ItemLocacao> lista = new ArrayList<ItemLocacao>();
-        lista.add(novositens);
-        novo.setItens(lista);
+        Locacao novo = new Locacao() {};
+        novo = locacoesRepository.save(locacao);
+        ItemLocacao novositens = new ItemLocacao() {};
+
+        //novo.addToItens(novositens); metodo 1
+
+        novositens.setLocacao(novo); // metodo 2
+        novo.getItens().add(novositens);
+
+        //List<ItemLocacao> lista = new ArrayList<>(); // metodo 3
+        //lista.add(novositens);
+        //novo.setItens(lista);
 
         return ResponseEntity.ok().body(novo);
     }

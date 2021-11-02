@@ -2,9 +2,12 @@ package com.example.takevideo.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class Locacao {
     private Long id;
 
     @ManyToOne
+    @NotNull
     private Cliente cliente;
 
     private Date datalocacao;
@@ -67,6 +71,11 @@ public class Locacao {
 
     public void setItens(List<ItemLocacao> itens) {
         this.itens = itens;
+    }
+
+    public void addToItens(ItemLocacao item) {
+        item.setLocacao(this);
+        this.itens.add(item);
     }
 
     public BigDecimal getValorlocacao() {
