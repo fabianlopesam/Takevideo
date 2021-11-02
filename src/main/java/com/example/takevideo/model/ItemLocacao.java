@@ -1,11 +1,15 @@
 package com.example.takevideo.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Table(name = "item_locacao")
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ItemLocacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

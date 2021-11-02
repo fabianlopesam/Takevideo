@@ -1,5 +1,8 @@
 package com.example.takevideo.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -7,6 +10,7 @@ import java.util.List;
 
 @Table(name = "locacoes")
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Locacao {
 
     @Id
@@ -20,7 +24,7 @@ public class Locacao {
     private Date datalocacao;
     private Date datadevolucao;
 
-    @OneToMany(mappedBy = "locacao")
+    @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL)
     private List<ItemLocacao> itens;
 
     private BigDecimal valorlocacao;
