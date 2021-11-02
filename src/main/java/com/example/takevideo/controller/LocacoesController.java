@@ -27,10 +27,10 @@ public class LocacoesController {
         Locacao novo = new Locacao();
         ItemLocacao novositens = new ItemLocacao();
         novositens.setLocacao(novo);
-        novo.getItens().add(novositens);
-        //List<ItemLocacao> lista = new ArrayList<ItemLocacao>();
-        //lista.add(novositens);
-        //novo.setItens(lista);
+        //novo.getItens().add(novositens);
+        List<ItemLocacao> lista = new ArrayList<ItemLocacao>();
+        lista.add(novositens);
+        novo.setItens(lista);
 
         locacoesRepository.save(novo);
         itensLocacaoRepository.save(novositens);
