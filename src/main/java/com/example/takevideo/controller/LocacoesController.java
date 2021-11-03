@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller // This means that this class is a Controller
@@ -31,6 +32,9 @@ public class LocacoesController {
         nova.setId(locacao.getId());*/
 
         locacao.getItens().forEach(ItemLocacao->ItemLocacao.setLocacao(locacao));
+        BigDecimal valorlocacao = BigDecimal.valueOf(locacoesRepository.valorlocacao(locacao.getId()));
+        locacao.setValorlocacao(valorlocacao);
+        itensLocacaoRepository.updatevaloritem(locacao.getId());
         Locacao nova = locacoesRepository.save(locacao);
 
         return new ResponseEntity<>(nova,HttpStatus.CREATED);
