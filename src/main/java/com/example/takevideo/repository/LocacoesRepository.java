@@ -11,7 +11,7 @@ import java.util.List;
 public interface LocacoesRepository extends JpaRepository<Locacao, Long> {
 
     @Query(value = "SELECT SUM(valoritem) FROM item_locacao WHERE locacao_id = :id", nativeQuery = true)
-    double valorlocacao(@Param("id") Long id);
+    BigDecimal valorlocacao(@Param("id") Long id);
 
     @Override
     List<Locacao> findAll();
