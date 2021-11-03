@@ -2,8 +2,6 @@ package com.example.takevideo.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,14 +20,13 @@ public class Locacao {
     private Long id;
 
     @ManyToOne
-    @NotNull
     private Cliente cliente;
 
     private Date datalocacao;
     private Date datadevolucao;
 
-    @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL)
-    private List<ItemLocacao> itens;
+    @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ItemLocacao> itens = new ArrayList<>();
 
     private BigDecimal valorlocacao;
 
@@ -83,6 +80,11 @@ public class Locacao {
     }
 
     public void setValorlocacao(BigDecimal valorlocacao) {
-        this.valorlocacao = valorlocacao;
+        double valortotal = 0;
+        for (ItemLocacao itemLocacao : itens) {
+            valortotal += itemLocacao.getValoritem().doubleValue();
+        }
+        this.valorlocacao = BigDecimal.valueOf(valortotal) ;
+  //      this.valorlocacao = valorlocacao;
     }
 }

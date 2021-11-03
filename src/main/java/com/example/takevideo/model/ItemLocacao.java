@@ -19,11 +19,9 @@ public class ItemLocacao {
     private Long id;
 
     @ManyToOne
-    @NotNull
     private Locacao locacao;
 
     @ManyToOne
-    @NotNull
     private Filme filme;
 
     private Integer quantidade;
@@ -67,6 +65,7 @@ public class ItemLocacao {
     }
 
     public void setValoritem(BigDecimal valoritem) {
-        this.valoritem = valoritem;
+        this.valoritem = getFilme().getValorunitario().multiply(BigDecimal.valueOf(getQuantidade()));
+        //this.valoritem = valoritem;
     }
 }

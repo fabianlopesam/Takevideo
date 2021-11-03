@@ -1,4 +1,5 @@
 package com.example.takevideo.controller;
+import com.example.takevideo.model.Cliente;
 import com.example.takevideo.model.ItemLocacao;
 import com.example.takevideo.model.Locacao;
 import com.example.takevideo.repository.ItensLocacaoRepository;
@@ -18,26 +19,22 @@ import java.util.List;
 public class LocacoesController {
     @Autowired
     private LocacoesRepository locacoesRepository;
-    @Autowired
     private ItensLocacaoRepository itensLocacaoRepository;
 
     @PostMapping(value = "salvar")
     @ResponseBody
     public ResponseEntity<Locacao> salvar (@RequestBody Locacao locacao){
-        Locacao novo = new Locacao() {};
-        novo = locacoesRepository.save(locacao);
-        ItemLocacao novositens = new ItemLocacao() {};
 
-        //novo.addToItens(novositens); metodo 1
+        Locacao nova = new Locacao();
+        nova.setValorlocacao(locacao.getValorlocacao());
+        nova.setCliente(locacao.getCliente());
+        nova.setDatadevolucao(locacao.getDatadevolucao());
+        nova.setDatalocacao(locacao.getDatalocacao());
+        nova.setItens(locacao.getItens());
 
-        novositens.setLocacao(novo); // metodo 2
-        novo.getItens().add(novositens);
+        nova = locacoesRepository.save(nova);
 
-        //List<ItemLocacao> lista = new ArrayList<>(); // metodo 3
-        //lista.add(novositens);
-        //novo.setItens(lista);
-
-        return ResponseEntity.ok().body(novo);
+        return new ResponseEntity<>(nova,HttpStatus.CREATED);
     }
 
     @GetMapping(value = "todos")
