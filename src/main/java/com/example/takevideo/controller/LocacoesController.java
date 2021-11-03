@@ -1,5 +1,4 @@
 package com.example.takevideo.controller;
-import com.example.takevideo.model.Cliente;
 import com.example.takevideo.model.ItemLocacao;
 import com.example.takevideo.model.Locacao;
 import com.example.takevideo.repository.ItensLocacaoRepository;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller // This means that this class is a Controller
@@ -25,14 +23,15 @@ public class LocacoesController {
     @ResponseBody
     public ResponseEntity<Locacao> salvar (@RequestBody Locacao locacao){
 
-        Locacao nova = new Locacao();
+        /*Locacao nova = new Locacao();
         nova.setValorlocacao(locacao.getValorlocacao());
         nova.setCliente(locacao.getCliente());
         nova.setDatadevolucao(locacao.getDatadevolucao());
         nova.setDatalocacao(locacao.getDatalocacao());
-        nova.setItens(locacao.getItens());
+        nova.setId(locacao.getId());*/
 
-        nova = locacoesRepository.save(nova);
+        locacao.getItens().forEach(ItemLocacao->ItemLocacao.setLocacao(locacao));
+        Locacao nova = locacoesRepository.save(locacao);
 
         return new ResponseEntity<>(nova,HttpStatus.CREATED);
     }

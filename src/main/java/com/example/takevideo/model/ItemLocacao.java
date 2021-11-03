@@ -18,7 +18,8 @@ public class ItemLocacao {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private Locacao locacao;
 
     @ManyToOne
@@ -65,7 +66,7 @@ public class ItemLocacao {
     }
 
     public void setValoritem(BigDecimal valoritem) {
-        this.valoritem = getFilme().getValorunitario().multiply(BigDecimal.valueOf(getQuantidade()));
-        //this.valoritem = valoritem;
+        //this.valoritem = getFilme().getValorunitario().multiply(BigDecimal.valueOf(getQuantidade()));
+        this.valoritem = valoritem;
     }
 }

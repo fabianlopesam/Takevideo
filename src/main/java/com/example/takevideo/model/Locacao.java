@@ -70,21 +70,16 @@ public class Locacao {
         this.itens = itens;
     }
 
-    public void addToItens(ItemLocacao item) {
-        item.setLocacao(this);
-        this.itens.add(item);
-    }
-
     public BigDecimal getValorlocacao() {
         return valorlocacao;
     }
 
     public void setValorlocacao(BigDecimal valorlocacao) {
-        double valortotal = 0;
-        for (ItemLocacao itemLocacao : itens) {
-            valortotal += itemLocacao.getValoritem().doubleValue();
-        }
-        this.valorlocacao = BigDecimal.valueOf(valortotal) ;
-  //      this.valorlocacao = valorlocacao;
+//        double valortotal = 0;
+//        for (ItemLocacao itemLocacao : itens) {
+//            valortotal += itemLocacao.getValoritem().doubleValue();
+//        }
+//        this.valorlocacao = BigDecimal.valueOf(valortotal) ;
+        this.valorlocacao = valorlocacao;
     }
 }
