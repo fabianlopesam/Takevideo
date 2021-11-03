@@ -30,6 +30,10 @@ public class Locacao {
 
     private BigDecimal valorlocacao;
 
+
+
+
+
     public Long getId() {
         return id;
     }

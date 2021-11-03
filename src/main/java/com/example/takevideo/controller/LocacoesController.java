@@ -18,29 +18,28 @@ import static javafx.scene.input.KeyCode.L;
 @RequestMapping(path="/locacoes") // This means URL's start with /demo (after Application path)
 
 public class LocacoesController {
+
     @Autowired
     private LocacoesRepository locacoesRepository;
-    private ItensLocacaoRepository itensLocacaoRepository;
+
 
     @PostMapping(value = "salvar")
-    @ResponseBody
     public ResponseEntity<Locacao> salvar (@RequestBody Locacao locacao){
 
-        /*Locacao nova = new Locacao();
-        nova.setValorlocacao(locacao.getValorlocacao());
-        nova.setCliente(locacao.getCliente());
-        nova.setDatadevolucao(locacao.getDatadevolucao());
-        nova.setDatalocacao(locacao.getDatalocacao());
-        nova.setId(locacao.getId());*/
+        BigDecimal valorlocacao = null;
+        locacao.getItens().forEach( item -> {
 
-        locacao.getItens().forEach(ItemLocacao->ItemLocacao.setLocacao(locacao));
+            item.setLocacao(locacao);
+            item.setValoritem(item.getFilme().getValorunitario().multiply(BigDecimal.valueOf(item.getQuantidade())));
+            valorlocacao.add(item.getValoritem());
 
-        //locacao.setValorlocacao(locacoesRepository.valorlocacao(locacao.getId()));
+        });
 
-        //itensLocacaoRepository.updatevaloritem(locacao.getId());
+        locacao.setValorlocacao(valorlocacao);
+
         Locacao nova = locacoesRepository.save(locacao);
 
-        return new ResponseEntity<>(nova,HttpStatus.CREATED);
+        return new ResponseEntity<>(nova, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "todos")
