@@ -64,7 +64,7 @@ public class LocacoesController {
     @PutMapping("{id}")
     public  ResponseEntity<Locacao> alterar (@RequestBody Locacao locacao, @PathVariable Long id) {
 
-        Locacao altera = locacoesRepository.getById(id);
+        Locacao altera = locacoesRepository.findById(id).get();
         altera.setValorlocacao(BigDecimal.ZERO);
 
         altera.getItens().forEach( item -> {
