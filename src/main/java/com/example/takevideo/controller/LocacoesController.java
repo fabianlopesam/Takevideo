@@ -65,7 +65,12 @@ public class LocacoesController {
     public  ResponseEntity<Locacao> alterar (@RequestBody Locacao locacao, @PathVariable Long id) {
 
         Locacao altera = locacoesRepository.findById(id).get();
+
         altera.setValorlocacao(BigDecimal.ZERO);
+        altera.setCliente(locacao.getCliente());
+        altera.setItens(locacao.getItens());
+        altera.setDatadevolucao(locacao.getDatadevolucao());
+        altera.setDatalocacao(locacao.getDatalocacao());
 
         altera.getItens().forEach( item -> {
             item.setLocacao(altera);
