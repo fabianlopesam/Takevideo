@@ -64,14 +64,16 @@ public class LocacoesController {
     @PutMapping("{id}")
     public  ResponseEntity<Locacao> alterar (@RequestBody Locacao locacao, @PathVariable Long id) {
 
-        locacoesRepository.findById(id).get();
-        locacao.getItens().forEach( item -> {
-            item.setLocacao(locacao);
+        Locacao altera = locacoesRepository.getById(id);
+        altera.setValorlocacao(BigDecimal.ZERO);
+
+        altera.getItens().forEach( item -> {
+            item.setLocacao(altera);
             item.setValoritem(item.getFilme().getValorunitario().multiply(new BigDecimal(item.getQuantidade())));
-            locacao.setValorlocacao(locacao.getValorlocacao().add(item.getValoritem()));
+            altera.setValorlocacao(altera.getValorlocacao().add(item.getValoritem()));
         });
 
-        return ResponseEntity.ok(locacoesRepository.save(locacao));
+        return ResponseEntity.ok(locacoesRepository.save(altera));
     }
 
     @PutMapping("/devolucao/{id}")
