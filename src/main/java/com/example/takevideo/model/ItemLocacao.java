@@ -66,7 +66,6 @@ public class ItemLocacao {
     }
 
     public void setValoritem(BigDecimal valoritem) {
-        //this.valoritem = getFilme().getValorunitario().multiply(BigDecimal.valueOf(getQuantidade()));
         this.valoritem = valoritem;
     }
 }

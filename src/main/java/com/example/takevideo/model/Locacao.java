@@ -1,10 +1,14 @@
 package com.example.takevideo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,17 +26,13 @@ public class Locacao {
     @ManyToOne
     private Cliente cliente;
 
-    private Date datalocacao;
-    private Date datadevolucao;
+    private LocalDate datalocacao;
+    private LocalDate datadevolucao;
 
     @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ItemLocacao> itens = new ArrayList<>();
 
     private BigDecimal valorlocacao;
-
-
-
-
 
     public Long getId() {
         return id;
@@ -50,19 +50,19 @@ public class Locacao {
         this.cliente = cliente;
     }
 
-    public Date getDatalocacao() {
+    public LocalDate getDatalocacao() {
         return datalocacao;
     }
 
-    public void setDatalocacao(Date datalocacao) {
+    public void setDatalocacao(LocalDate datalocacao) {
         this.datalocacao = datalocacao;
     }
 
-    public Date getDatadevolucao() {
+    public LocalDate getDatadevolucao() {
         return datadevolucao;
     }
 
-    public void setDatadevolucao(Date datadevolucao) {
+    public void setDatadevolucao(LocalDate datadevolucao) {
         this.datadevolucao = datadevolucao;
     }
 
@@ -79,11 +79,6 @@ public class Locacao {
     }
 
     public void setValorlocacao(BigDecimal valorlocacao) {
-//        double valortotal = 0;
-//        for (ItemLocacao itemLocacao : itens) {
-//            valortotal += itemLocacao.getValoritem().doubleValue();
-//        }
-//        this.valorlocacao = BigDecimal.valueOf(valortotal) ;
         this.valorlocacao = valorlocacao;
     }
 }

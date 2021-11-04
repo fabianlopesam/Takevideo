@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static javafx.scene.input.KeyCode.B;
 import static javafx.scene.input.KeyCode.L;
 
 @Controller // This means that this class is a Controller
@@ -26,16 +27,16 @@ public class LocacoesController {
     @PostMapping(value = "salvar")
     public ResponseEntity<Locacao> salvar (@RequestBody Locacao locacao){
 
-        BigDecimal valorlocacao = null;
+        locacao.setValorlocacao( BigDecimal.ZERO );
+
+
         locacao.getItens().forEach( item -> {
 
             item.setLocacao(locacao);
-            item.setValoritem(item.getFilme().getValorunitario().multiply(BigDecimal.valueOf(item.getQuantidade())));
-            valorlocacao.add(item.getValoritem());
+            item.setValoritem(item.getFilme().getValorunitario().multiply(new BigDecimal(item.getQuantidade())));
+            locacao.setValorlocacao(locacao.getValorlocacao().add(item.getValoritem()));
 
         });
-
-        locacao.setValorlocacao(valorlocacao);
 
         Locacao nova = locacoesRepository.save(locacao);
 
@@ -62,6 +63,19 @@ public class LocacoesController {
 
     @PutMapping("{id}")
     public  ResponseEntity<Locacao> alterar (@RequestBody Locacao locacao, @PathVariable Long id) {
+
+        locacoesRepository.findById(id).get();
+        locacao.getItens().forEach( item -> {
+            item.setLocacao(locacao);
+            item.setValoritem(item.getFilme().getValorunitario().multiply(new BigDecimal(item.getQuantidade())));
+            locacao.setValorlocacao(locacao.getValorlocacao().add(item.getValoritem()));
+        });
+
+        return ResponseEntity.ok(locacoesRepository.save(locacao));
+    }
+
+    @PutMapping("/devolucao/{id}")
+    public  ResponseEntity<Locacao> devolver (@RequestBody Locacao locacao, @PathVariable Long id) {
         Locacao altera = locacoesRepository.findById(id).get();
         altera.setDatalocacao(locacao.getDatalocacao());
         altera.setDatadevolucao(locacao.getDatadevolucao());

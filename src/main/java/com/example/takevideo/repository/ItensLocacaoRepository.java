@@ -10,7 +10,5 @@ import sun.util.resources.cldr.guz.LocaleNames_guz;
 import java.util.Optional;
 
 public interface ItensLocacaoRepository extends JpaRepository<ItemLocacao, Long> {
-    @Modifying
-    @Query( value = "UPDATE item_locacao JOIN filmes SET valoritem = quantidade * filmes.valorunitario WHERE locacao_id = :id AND filme_id = filmes.id", nativeQuery = true)
-    void updatevaloritem(@Param("id") Long id);
+
 }
