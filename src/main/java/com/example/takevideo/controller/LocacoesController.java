@@ -1,7 +1,6 @@
 package com.example.takevideo.controller;
 import com.example.takevideo.model.ItemLocacao;
 import com.example.takevideo.model.Locacao;
-import com.example.takevideo.repository.ItensLocacaoRepository;
 import com.example.takevideo.repository.LocacoesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
-
-import static javafx.scene.input.KeyCode.B;
-import static javafx.scene.input.KeyCode.L;
+import java.util.Optional;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path="/locacoes") // This means URL's start with /demo (after Application path)
@@ -64,16 +60,23 @@ public class LocacoesController {
     @PutMapping("{id}")
     public  ResponseEntity<Locacao> alterar (@RequestBody Locacao locacao, @PathVariable Long id) {
 
+
+
         Locacao altera = locacoesRepository.findById(id).get();
         altera.setValorlocacao(BigDecimal.ZERO);
+        altera.setDatalocacao(locacao.getDatalocacao());
+        altera.setDatadevolucao(locacao.getDatadevolucao());
+        altera.setCliente(locacao.getCliente());
+        altera.setItens(locacao.getItens());
 
-        altera.getItens().forEach( item -> {
+        altera.getItens().forEach(item -> {
             item.setLocacao(altera);
             item.setValoritem(item.getFilme().getValorunitario().multiply(new BigDecimal(item.getQuantidade())));
             altera.setValorlocacao(altera.getValorlocacao().add(item.getValoritem()));
         });
 
-        return ResponseEntity.ok(locacoesRepository.save(altera));
+        //return ResponseEntity.ok(locacoesRepository.save(altera));
+        return ResponseEntity.ok(altera);
     }
 
     @PutMapping("/devolucao/{id}")
